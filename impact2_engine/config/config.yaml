@@ -1,0 +1,3 @@
+data_path: enroll_proj_data.rds
+date_column: ENR_DATE
+id_column: SUBJECT_ID

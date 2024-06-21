@@ -1,0 +1,59 @@
+# Dashboard data configuration
+---
+data_path: FADS.parquet
+contents:
+  DON: # nominal (object)
+    - var: donor_id
+      name: DONOR_ID
+    - var: wd_fl
+      name: WITHDRAW
+
+  GRP:   # main stratification (category)
+    - var: trt_group
+      name: GROUP   
+  
+  CAT:  # stratification (category)
+    - var: site
+      name: SITE 
+    - var: gender
+      name: GENDER
+    - var: donor_status
+      name: STATUS
+    - var: age_cat
+      name: AGE
+    - var: weight_cat
+      name: WEIGHT
+    - var: bmi_cat
+      name: BMI
+    - var: hct_cat
+      name: HEMO
+      # bin:  # include lower bound [a,b)
+      #   - 0
+      #   - 0.36
+      #   - 0.40
+      #   - 0.45
+      #   - 0.50
+      #   - 100   # Out of box
+      # lvl:
+      #   - 0-36
+      #   - 36-40
+      #   - 41-45
+      #   - 46-50
+      #   - 50+
+  PLZ:  # Plazma metrics
+    - var: target_volume
+      name : TARGET
+    - var: actual_volume
+      name: ACTUAL
+    - var: yield
+      name: YIELD
+    - var: n_overdraws
+      name: OVERDRAWS
+    - var: n_underdraws
+      name: UNDERDRAWS
+      lvl:
+        - 0.25
+        - 0.50
+        - 0.75  
+
+na_filter: True

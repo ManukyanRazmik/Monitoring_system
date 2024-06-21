@@ -1,0 +1,156 @@
+# Safety data configuration
+# Column names grouped, with parameters to some
+---
+data_path: safety_processed.csv
+contents:
+  IDS:  # nominal (object)
+    - var: don_id
+      name: DONOR_NUMBER
+    - var: col_id
+      name: COLLECTION_NUMBER
+      plan: 60000
+  DAT:  # date/time (only 1 column)
+    - var: col_date
+      name: DONATION_DATE
+  CAT:  # stratification (category)
+    - var: site
+      name: SITE_ID
+    - var: status
+      name: DONOR_SITE_STATUS
+    - var: group
+      name: GROUP
+    - var: gender
+      name: GENDER
+    - var: age
+      name: AGE
+      bin:  # include lower bound [a,b)
+        - 18
+        - 25
+        - 40
+        - 65
+        - 1000  # out-of-bounds
+      lvl:
+        - 18-24
+        - 25-39
+        - 40-64
+        - 65+
+    - var: bmi
+      name: BMI_CALC
+      bin:  # include lower bound [a,b)
+        - 0
+        - 18.5
+        - 25
+        - 30
+        - 1000  # out-of-bounds
+      lvl:
+        - underweight
+        - normal
+        - overweight
+        - obese
+    - var: weight
+      name: WEIGHT
+      bin: 4  # quantile cut
+      lvl:
+        - q1
+        - q2
+        - q3
+        - q4
+  POP:  # population flags (bool)
+    - var: itt
+      name: ITT
+    - var: mitt
+      name: MITT
+    - var: pp
+      name: PP
+  SEV:  # severity flags (bool)
+    - var: all_ae  # full AE list in the 1st position
+      name: ALL_AE_FL
+      margin: 0
+      aes:  # all possible adverse events
+        - '1.1'
+        - '1.2'
+        - '1.3'
+        - '1.4'
+        - '1.5'
+        - '1.6'
+        - '2.1'
+        - '3.1'
+        - '3.2'
+        - '3.3'
+        - '3.4'
+        - '3.5'
+        - '3.6'
+        - '3.7'
+        - '4.1'
+        - '4.2'
+        - '4.3'
+        - '5.1'
+        - '5.2'
+        - '6.1'
+        - '6.2'
+        - '7.1'
+        - '7.2'
+        - '7.3'
+        - '8.1'
+        - '9.1'
+        - '10.1'
+        - '10.2'
+        - '10.3'
+        - '10.4'
+        - '10.5'
+        - '10.6'
+    - var: non_hyp
+      name: NON_HYP_FL
+      margin: 0
+      aes:
+        - '2.1'
+        - '3.1'
+        - '3.2'
+        - '3.3'
+        - '3.4'
+        - '3.5'
+        - '3.6'
+        - '3.7'
+        - '4.1'
+        - '4.2'
+        - '4.3'
+        - '5.1'
+        - '5.2'
+        - '6.1'
+        - '6.2'
+        - '7.1'
+        - '7.2'
+        - '7.3'
+        - '8.1'
+        - '9.1'
+        - '10.1'
+        - '10.2'
+        - '10.3'
+        - '10.4'
+        - '10.5'
+        - '10.6'
+    - var: hyp
+      name: HYP_FL
+      margin: 0
+      aes:
+        - '1.1'
+        - '1.2'
+        - '1.3'
+        - '1.4'
+        - '1.5'
+        - '1.6'
+    - var: sig_hyp
+      name: SIG_HYP_FL
+      aes:
+        - '1.2'
+        - '1.3'
+        - '1.4'
+        - '1.5'
+        - '1.6'
+      margin: .15
+    - var: only_1.1
+      name: ONLY_1.1_FL
+      margin: 0
+      aes:
+        - '1.1'
+na_filter: True

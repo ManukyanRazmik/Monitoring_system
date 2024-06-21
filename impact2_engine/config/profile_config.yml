@@ -1,0 +1,103 @@
+# Safety data configuration
+# Column names grouped, with parameters to some
+---
+data_path: profile_processed.csv
+contents:
+  IDS:  # nominal (object)
+    - var: don_id
+      name: DONOR_NUMBER
+    - var: col_id
+      name: COLLECTION_NUMBER
+      plan: 60000
+    - var: dev_id
+      name: DEVICE_ID
+  DTS:  # date/time (only 1 column)
+    - var: col_date
+      name: DONATION_DATE
+      format: '%Y-%m-%d'
+    - var: proc_start
+      name: PROCEDURE_START
+      format: '%Y-%m-%d %H:%M:%S'
+    - var: proc_end
+      name: PROCEDURE_END
+      format: '%Y-%m-%d %H:%M:%S'
+  CAT:  # stratification (category)
+    - var: site
+      name: SITE_ID
+    - var: status
+      name: DONOR_SITE_STATUS
+    - var: group
+      name: GROUP
+    - var: gender
+      name: GENDER
+  DEM:
+    - var: age
+    - var: bmi
+    - var: weight
+  VOL:
+    - var: hct
+      na: 0
+    - var: target_vol
+      name: TARGET_VOLUME
+      na: 0
+    - var: actual_vol
+      name: ACTUAL_VOLUME
+      na: 0
+    - var: duration_minutes  # derived
+      na: 0
+    - var: speed             # derived
+    - var: yield             # derived
+    - var: yield_resid       # derived
+  POP:  # population flags (bool)
+    - var: itt
+      name: ITT
+    - var: mitt
+      name: MITT
+    - var: pp
+      name: PP
+  SEV:  # severity flags (bool)
+    - var: all_ae  # full AE list in the 1st position
+      name: ALL_AE_FL
+      margin: 0
+      aes:  # all possible adverse events
+        - '1.1'
+        - '1.2'
+        - '1.3'
+        - '1.4'
+        - '1.5'
+        - '1.6'
+        - '2.1'
+        - '3.1'
+        - '3.2'
+        - '3.3'
+        - '3.4'
+        - '3.5'
+        - '3.6'
+        - '3.7'
+        - '4.1'
+        - '4.2'
+        - '4.3'
+        - '5.1'
+        - '5.2'
+        - '6.1'
+        - '6.2'
+        - '7.1'
+        - '7.2'
+        - '7.3'
+        - '8.1'
+        - '9.1'
+        - '10.1'
+        - '10.2'
+        - '10.3'
+        - '10.4'
+        - '10.5'
+        - '10.6'
+    - var: sig_hyp
+      name: SIG_HYP_FL
+      aes:
+        - '1.2'
+        - '1.3'
+        - '1.4'
+        - '1.5'
+        - '1.6'
+na_filter: True
